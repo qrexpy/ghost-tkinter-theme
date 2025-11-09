@@ -21,7 +21,7 @@ import sys
 import ttkbootstrap as ttk
 from ttkbootstrap.utility import enable_high_dpi_awareness
 from ttkbootstrap.scrolled import ScrolledFrame
-from components import RoundedFrame, RoundedButton, RoundedCombobox, RoundedListbox
+from components import RoundedFrame, RoundedButton, RoundedCombobox, RoundedListbox, RoundedMenu, create_menubar
 
 
 class GhostTemplateShowcase:
@@ -44,6 +44,9 @@ class GhostTemplateShowcase:
         
         # Center window on screen
         self.center_window()
+        
+        # Create menubar
+        self.create_menubar()
         
     def setup_theme(self):
         """Load and configure the Ghost theme"""
@@ -93,6 +96,47 @@ class GhostTemplateShowcase:
         y = (screen_height // 2) - (self.size[1] // 2)
         
         self.root.geometry(f"{self.size[0]}x{self.size[1]}+{x}+{y}")
+    
+    def create_menubar(self):
+        """Create a themed menubar"""
+        menubar = create_menubar(self.root)
+        
+        # File menu
+        file_menu = RoundedMenu(menubar)
+        file_menu.add_command(label="New", accelerator="Ctrl+N", command=self.on_menu_click)
+        file_menu.add_command(label="Open", accelerator="Ctrl+O", command=self.on_menu_click)
+        file_menu.add_command(label="Save", accelerator="Ctrl+S", command=self.on_menu_click)
+        file_menu.add_separator()
+        file_menu.add_command(label="Exit", command=self.root.quit)
+        menubar.add_cascade(label="File", menu=file_menu)
+        
+        # Edit menu
+        edit_menu = RoundedMenu(menubar)
+        edit_menu.add_command(label="Undo", accelerator="Ctrl+Z", command=self.on_menu_click)
+        edit_menu.add_command(label="Redo", accelerator="Ctrl+Y", command=self.on_menu_click)
+        edit_menu.add_separator()
+        edit_menu.add_command(label="Cut", accelerator="Ctrl+X", command=self.on_menu_click)
+        edit_menu.add_command(label="Copy", accelerator="Ctrl+C", command=self.on_menu_click)
+        edit_menu.add_command(label="Paste", accelerator="Ctrl+V", command=self.on_menu_click)
+        menubar.add_cascade(label="Edit", menu=edit_menu)
+        
+        # View menu with checkbuttons
+        view_menu = RoundedMenu(menubar)
+        self.show_toolbar = ttk.BooleanVar(value=True)
+        self.show_statusbar = ttk.BooleanVar(value=True)
+        view_menu.add_checkbutton(label="Toolbar", variable=self.show_toolbar, command=self.on_menu_click)
+        view_menu.add_checkbutton(label="Status Bar", variable=self.show_statusbar, command=self.on_menu_click)
+        menubar.add_cascade(label="View", menu=view_menu)
+        
+        # Help menu
+        help_menu = RoundedMenu(menubar)
+        help_menu.add_command(label="Documentation", command=self.on_menu_click)
+        help_menu.add_command(label="About", command=self.on_menu_click)
+        menubar.add_cascade(label="Help", menu=help_menu)
+    
+    def on_menu_click(self):
+        """Example menu callback"""
+        print("Menu item clicked!")
         
     def create_header_section(self, parent):
         """Create the header showcase section"""
