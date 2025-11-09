@@ -2,9 +2,7 @@
 
 Modern, production-ready Tkinter UI components with hexagonal rounded containers, smooth hover effects, and a stunning dark theme. Drop it into any Python project and build beautiful interfaces in minutes.
 
-![Ghost Theme](https://img.shields.io/badge/Theme-Ghost-433dfb)
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
 
 ## ✨ Features
 
