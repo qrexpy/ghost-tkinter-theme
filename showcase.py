@@ -21,7 +21,7 @@ import sys
 import ttkbootstrap as ttk
 from ttkbootstrap.utility import enable_high_dpi_awareness
 from ttkbootstrap.scrolled import ScrolledFrame
-from components import RoundedFrame, RoundedButton, RoundedCombobox
+from components import RoundedFrame, RoundedButton, RoundedCombobox, RoundedListbox
 
 
 class GhostTemplateShowcase:
@@ -337,6 +337,23 @@ class GhostTemplateShowcase:
             width=30
         )
         combobox.pack(fill=ttk.X, padx=15, pady=(0, 10))
+        
+        # Listbox
+        listbox_label = ttk.Label(
+            input_container,
+            text="Select Items:",
+            font=("Host Grotesk", 10)
+        )
+        listbox_label.configure(background=self.root.style.colors.get("secondary"))
+        listbox_label.pack(pady=(5, 5), padx=15, anchor=ttk.W)
+        
+        listbox = RoundedListbox(
+            input_container,
+            values=["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7"],
+            height=5,
+            selectmode="browse"
+        )
+        listbox.pack(fill=ttk.BOTH, padx=15, pady=(0, 10))
         
         # Checkbutton
         check_var = ttk.BooleanVar(value=True)
