@@ -21,7 +21,7 @@ import sys
 import ttkbootstrap as ttk
 from ttkbootstrap.utility import enable_high_dpi_awareness
 from ttkbootstrap.scrolled import ScrolledFrame
-from components import RoundedFrame, RoundedButton
+from components import RoundedFrame, RoundedButton, RoundedCombobox
 
 
 class GhostTemplateShowcase:
@@ -295,24 +295,24 @@ class GhostTemplateShowcase:
     def create_input_section(self, parent):
         """Showcase form inputs"""
         section_title = ttk.Label(
-            parent, 
-            text="Form Inputs", 
+            parent,
+            text="Form Inputs",
             font=("Host Grotesk", 14, "bold")
         )
         section_title.pack(pady=(10, 10), anchor=ttk.W)
         
         # Input container
         input_container = RoundedFrame(
-            parent, 
-            radius=15, 
+            parent,
+            radius=15,
             bootstyle="secondary.TFrame"
         )
         input_container.pack(fill=ttk.X, pady=(0, 10))
         
         # Text entry
         entry_label = ttk.Label(
-            input_container, 
-            text="Text Input:", 
+            input_container,
+            text="Text Input:",
             font=("Host Grotesk", 10)
         )
         entry_label.configure(background=self.root.style.colors.get("secondary"))
@@ -321,6 +321,22 @@ class GhostTemplateShowcase:
         entry = ttk.Entry(input_container, font=("Host Grotesk", 10))
         entry.insert(0, "Enter text here...")
         entry.pack(fill=ttk.X, padx=15, pady=(0, 10))
+        
+        # Combobox
+        combo_label = ttk.Label(
+            input_container,
+            text="Dropdown Selection:",
+            font=("Host Grotesk", 10)
+        )
+        combo_label.configure(background=self.root.style.colors.get("secondary"))
+        combo_label.pack(pady=(5, 5), padx=15, anchor=ttk.W)
+        
+        combobox = RoundedCombobox(
+            input_container,
+            values=["Python", "JavaScript", "TypeScript", "Rust", "Go", "C++", "Java"],
+            width=30
+        )
+        combobox.pack(fill=ttk.X, padx=15, pady=(0, 10))
         
         # Checkbutton
         check_var = ttk.BooleanVar(value=True)
